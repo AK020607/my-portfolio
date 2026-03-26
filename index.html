@@ -1,86 +1,277 @@
-<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>ASHUTOSH KARN | Portfolio</title>
-  <link rel="stylesheet" href="style.css" />
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Library Management System</title>
+  <link rel="stylesheet" href="lms.css">
 </head>
 <body>
-  <!-- Container with name and profile photo -->
-  <div class="container">
-    <div class="left">
-      <h2>Hi, I am</h2>
-      <h1>ASHUTOSH KARN</h1>
+  <main class="app-shell">
+    <section class="entry-layout">
+      <aside class="brand-panel">
+        <div class="brand-top">
+          <img src="logo.png.jpeg" alt="SRM University logo" class="brand-logo">
+          <div>
+            <p class="eyebrow light-text">Smart Library Portal</p>
+            <h1>Library Management System</h1>
+            <p class="brand-campus">SRM University Delhi-NCR, Sonepat</p>
+          </div>
+        </div>
 
-      <div class="socials">
-        <a href="https://instagram.com/thekarnashutosh">
-          <img src="instagram-icon.png" alt="Instagram">
-        </a>
-        <a href="https://www.linkedin.com/in/ashutosh-karn-b783b337" target="_blank">
-          <img src="linkedin-icon.png" alt="LinkedIn">
-        </a>
+        <div class="brand-copy">
+          <span class="brand-badge">Fresh White And Blue Design</span>
+          <h2>Students can log in easily and admins can manage books, students, and issued records from one dashboard.</h2>
+          <p>
+            Student login uses registration number and mobile number. Admin login opens controls to add new books, add students, and see how many students currently have books issued.
+          </p>
+        </div>
+
+        <div class="brand-stats">
+          <div class="brand-stat-card">
+            <strong>Student Portal</strong>
+            <span>Login with registration number and mobile number</span>
+          </div>
+          <div class="brand-stat-card">
+            <strong>Admin Portal</strong>
+            <span>Track issued books and add new library records</span>
+          </div>
+        </div>
+      </aside>
+
+      <section id="authPanel" class="auth-panel student-auth">
+        <div class="auth-intro">
+          <p class="section-tag">Library Access</p>
+          <h2>Choose your login</h2>
+          <p>Move between student and admin login to access the correct library portal.</p>
+        </div>
+
+        <div class="mode-switch" role="tablist" aria-label="Login mode">
+          <button id="studentModeBtn" class="mode-btn active" type="button" onclick="switchMode('student')">Student</button>
+          <button id="adminModeBtn" class="mode-btn" type="button" onclick="switchMode('admin')">Admin</button>
+        </div>
+
+        <div id="studentLoginCard" class="login-card">
+          <div class="login-card-badge student-badge">Student Access</div>
+          <div class="card-heading">
+            <h3>Student Login</h3>
+            <p>Use your registration number and mobile number to open your library account.</p>
+          </div>
+
+          <div class="login-highlight student-highlight">
+            <h4>Student features</h4>
+            <ul class="feature-list">
+              <li>Check books available in the library</li>
+              <li>Issue, renew, and return books</li>
+              <li>Track due dates and fines</li>
+            </ul>
+          </div>
+
+          <form id="loginForm" class="stack-form">
+            <label>
+              <span>Registration Number</span>
+              <input type="text" id="registrationNumber" placeholder="Enter your registration number" required>
+            </label>
+            <label>
+              <span>Mobile Number</span>
+              <input type="text" id="mobileNumber" placeholder="Enter your mobile number" required>
+            </label>
+            <button type="submit" class="primary-btn wide-btn">Enter Student Portal</button>
+          </form>
+
+          <p id="loginMessage" class="status-text"></p>
+        </div>
+
+        <div id="adminLoginCard" class="login-card hidden">
+          <div class="login-card-badge admin-badge">Admin Access</div>
+          <div class="card-heading">
+            <h3>Admin Login</h3>
+            <p>Open the admin dashboard to add books, add students, and monitor issued books.</p>
+          </div>
+
+          <div class="login-highlight admin-highlight">
+            <h4>Admin features</h4>
+            <ul class="feature-list">
+              <li>See how many students have issued books</li>
+              <li>Add new students and new books</li>
+              <li>Manage active issues, renewals, returns, and fines</li>
+            </ul>
+          </div>
+
+          <form id="adminLoginForm" class="stack-form">
+            <label>
+              <span>Username</span>
+              <input type="text" id="adminUsername" placeholder="Enter admin username" value="admin" required>
+            </label>
+            <label>
+              <span>Password</span>
+              <input type="password" id="adminPassword" placeholder="Enter admin password" value="admin123" required>
+            </label>
+            <button type="submit" class="primary-btn wide-btn">Open Admin Dashboard</button>
+          </form>
+
+          <p id="adminLoginMessage" class="status-text">Demo: admin / admin123</p>
+        </div>
+      </section>
+    </section>
+
+    <section id="dashboardSection" class="dashboard-shell hidden">
+      <header class="dashboard-hero">
+        <div>
+          <p class="eyebrow">Library Dashboard</p>
+          <h2>White and blue library workspace for students, books, and issue tracking</h2>
+          <p class="hero-copy">
+            Admin can see total students, students with issued books, total books, issued books, and fines. Students can log in and manage their own library activity.
+          </p>
+        </div>
+
+        <div class="hero-card">
+          <img src="srm-background.png" alt="SRM University logo" class="hero-logo">
+          <p class="hero-stat-label">Fine Rule</p>
+          <p class="hero-stat">14 Days Free</p>
+          <p class="hero-note">After 14 days, the fine is Rs. 10 per day until the book is renewed or returned.</p>
+        </div>
+      </header>
+
+      <div class="layout-grid">
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-tag">Student Access</p>
+              <h2>Logged In Student</h2>
+            </div>
+            <span class="pill">Registration + Mobile</span>
+          </div>
+
+          <div id="studentSection" class="student-section hidden">
+            <div class="student-card" id="studentDetails"></div>
+
+            <div class="panel-header compact">
+              <div>
+                <p class="section-tag">Student Books</p>
+                <h3>Issue, Renew, Or Return</h3>
+              </div>
+            </div>
+
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th>Available</th>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Fine</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="studentBooksTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div id="studentEmptyState" class="empty-state">
+            <h3>No student logged in</h3>
+            <p>Use the student portal above to open a library account and manage books.</p>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-header">
+            <div>
+              <p class="section-tag">Administration</p>
+              <h2>Admin Overview</h2>
+            </div>
+            <button id="refreshOverviewBtn" class="secondary-btn" type="button">Refresh</button>
+          </div>
+
+          <div class="forms-grid">
+            <form id="addStudentForm" class="mini-form">
+              <h3>Add New Student</h3>
+              <p class="form-copy">Create a new student record for library access.</p>
+              <input type="text" id="newStudentName" placeholder="Student name" required>
+              <input type="text" id="newStudentRegistration" placeholder="Registration number" required>
+              <input type="text" id="newStudentMobile" placeholder="Mobile number" required>
+              <input type="text" id="newStudentCourse" placeholder="Course" required>
+              <button type="submit" class="secondary-btn">Save Student</button>
+            </form>
+
+            <form id="addBookForm" class="mini-form">
+              <h3>Add New Book</h3>
+              <p class="form-copy">Add a book title and update copies in the library.</p>
+              <input type="text" id="newBookTitle" placeholder="Book title" required>
+              <input type="text" id="newBookAuthor" placeholder="Author name" required>
+              <input type="text" id="newBookCategory" placeholder="Category" required>
+              <input type="number" id="newBookCopies" placeholder="Copies" min="1" required>
+              <button type="submit" class="secondary-btn">Save Book</button>
+            </form>
+          </div>
+
+          <p id="adminMessage" class="status-text"></p>
+
+          <div class="stats-grid" id="summaryCards"></div>
+
+          <div class="overview-section">
+            <h3>Books Left In Library</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Book</th>
+                    <th>Author</th>
+                    <th>Category</th>
+                    <th>Total</th>
+                    <th>Available</th>
+                    <th>Issued</th>
+                  </tr>
+                </thead>
+                <tbody id="booksOverviewTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="overview-section">
+            <h3>Students Who Have Taken Books</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Registration</th>
+                    <th>Mobile</th>
+                    <th>Course</th>
+                    <th>Books Taken</th>
+                  </tr>
+                </thead>
+                <tbody id="studentsOverviewTable"></tbody>
+              </table>
+            </div>
+          </div>
+
+          <div class="overview-section">
+            <h3>Which Student Has Taken Which Book</h3>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr>
+                    <th>Student</th>
+                    <th>Book</th>
+                    <th>Issue Date</th>
+                    <th>Due Date</th>
+                    <th>Days Left</th>
+                    <th>Fine</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="issuesOverviewTable"></tbody>
+              </table>
+            </div>
+          </div>
+        </section>
       </div>
-    </div>
+    </section>
+  </main>
 
-    <div class="right">
-      <div class="profile-image">
-        <img src="IMG_20250303_090526_191[1].webp" alt="Profile Photo">
-      </div>
-    </div>
-  </div>
-
-  <!-- Navigation Bar -->
-  <nav>
-    <a href="#about">About me</a>
-    <a href="#skills">Skills</a>
-    <a href="#project">Project</a>
-    <a href="#contact" class="contact-btn">Contact Me</a>
-  </nav>
-
-  <!-- About Section -->
-  <section id="about">
-    <h2>About Me</h2>
-    <p>
-      I’m Ashutosh Karn, a BCA student from SRM University, Sonepat, Haryana. I’m passionate about technology, coding, and solving real-world problems through software development.
-      I have hands-on experience in creating websites using HTML, CSS, and JavaScript. Currently, I’m learning full-stack development to improve my technical skills.
-      I’m open to internships, freelance projects, and entry-level opportunities where I can grow and contribute as a developer. Let's connect!
-    </p>
-  </section>
-
-  <!-- Skills Section -->
-  <section id="skills">
-    <h2>My Skills</h2>
-    <ul>
-      <li>HTML & CSS</li>
-      <li>JavaScript</li>
-      <li>Responsive Web Design</li>
-      <li>Basic Java Programming</li>
-      <li>MS Excel & Word</li>
-    </ul>
-  </section>
-
-  <!-- Projects Section -->
-  <section id="project">
-    <h2>My Project</h2>
-    <p>Here is my project.</p>
-    <img src="project1.jpg" alt="Project Screenshot 1">
-    <img src="project 2.jpg" alt="Project Screenshot 2">
-    <img src="project 3.jpg" alt="Project Screenshot 3">
-    <img src="project 4.jpg" alt="Project Screenshot 4">
-    <img src="project 5.jpg" alt="Project Screenshot 5">
-    <img src="project 6.jpg" alt="Project Screenshot 6">
-  </section>
-
-  <!-- Contact Section -->
-  <section id="contact">
-    <h2>Contact Me</h2>
-    <p>You can reach out to me through the following platforms:</p>
-    <ul>
-      <li>Email: <a href="mailto:ashutoshkarn09@gmail.com">ashutoshkarn09@gmail.com</a></li>
-      <li>LinkedIn: <a href="https://www.linkedin.com/in/ashutosh-karn-b783b337" target="_blank">Visit my profile</a></li>
-      <li>Instagram: <a href="https://instagram.com/thekarnashutosh" target="_blank">@thekarnashutosh</a></li>
-    </ul>
-  </section>
+  <script src="lms.js"></script>
 </body>
 </html>
